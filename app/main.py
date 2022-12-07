@@ -118,7 +118,7 @@ def get_post(post_id: int):
         id (int): The id of the post is passed here
     """
     post = cursor.execute(
-        'SELECT title, content FROM posts WHERE id IS %s', (str(post_id)))
+        """SELECT title, content FROM posts WHERE id IS %s""", (str(post_id)))
 
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
