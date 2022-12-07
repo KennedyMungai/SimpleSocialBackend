@@ -91,7 +91,7 @@ def get_posts():
     """
         This is a simple function that retrieves all the posts
     """
-    posts = cursor.execute('SELECT * FROM Posts')
+    posts = cursor.execute('SELECT * FROM posts')
     print(posts)
     # return {"data": posts}
     return {"data": my_posts}
