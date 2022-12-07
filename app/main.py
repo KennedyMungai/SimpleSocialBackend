@@ -108,7 +108,7 @@ def create_posts(post: Post):
     conn.commit()
     # cursor.close()
     # conn.close()
-    return {"data": post}
+    return {"data": new_post}
 
 
 @app.get("/posts/{post_id}")
