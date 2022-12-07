@@ -54,3 +54,17 @@ def find_post(_id: int):
     for _p in my_posts:
         if _p["id"] == _id:
             return _p
+
+
+def find_index_post(_id: int):
+    """This function find posts bi index
+
+    Args:
+        _id (int): This is the id of the post
+
+    Returns:
+        post: Returns the post of the id indicated
+    """
+    for _i, _p in enumerate(my_posts):
+        if _p['id'] == _id:
+            return _i
