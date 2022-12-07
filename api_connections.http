@@ -7,7 +7,7 @@ GET http://127.0.0.1:8000/posts HTTP/1.1
 Content-Type: application/json
 
 ### The SQL query to get a specific post
-GET http://127.0.0.1:8000/posts/3 HTTP/1.1
+GET http://127.0.0.1:8000/posts/1 HTTP/1.1
 
 ### The post endpoint that creates posts
 POST http://127.0.0.1:8000/posts HTTP/1.1
