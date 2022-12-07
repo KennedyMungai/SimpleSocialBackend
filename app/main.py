@@ -5,11 +5,13 @@ Author:- Kennedy Mungai
 
 Project:- Simple social media backend
 """
-from pydantic import BaseModel
 from typing import Optional
-from fastapi import FastAPI, Response, status, HTTPException
-
+# from random import randrange
+# import time
 import mysql.connector
+
+from fastapi import FastAPI, Response, status, HTTPException
+from pydantic import BaseModel
 
 app = FastAPI()
 
