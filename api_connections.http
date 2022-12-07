@@ -3,7 +3,7 @@ GET http://127.0.0.1:8000/ HTTP/1.1
 Content-Type: application/json
 
 ### The endpoint to get all the posts
-get http://127.0.0.1:8000/posts HTTP/1.1
+get http://127.0.0.1:8000/posts HTTP/   1.1
 Content-Type: application/json
 
 ### The post endpoint that creates posts
@@ -11,7 +11,7 @@ post http://127.0.0.1:8000/posts HTTP/1.1
 Content-Type: application/json
 
 {
-    "title": "Brand New Eyes",
-    "content": "You can't be too careful anymore",
+    "title": "Audioslave",
+    "content": "Like a stone",
     "published": "true"
 }
