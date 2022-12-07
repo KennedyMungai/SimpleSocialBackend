@@ -102,7 +102,7 @@ def create_posts(post: Post):
     """
         This is an API function thar creates posts
     """
-    cursor.execute("INSERT INTO Posts(title, content, is_published) VALUES (%s, %s, %s)",
+    cursor.execute("INSERT INTO posts(title, content, is_published) VALUES (%s, %s, %s)",
                    (post.title, post.content, post.published))
     conn.commit()
     # cursor.close()
