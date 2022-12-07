@@ -20,7 +20,7 @@ try:
         host='localhost',
         user='root',
         password='xknightmare12873',
-        database='fastapicoursedb'
+        database='simple_social_db'
     )
 
     cursor = conn.cursor(dictionary=True)
