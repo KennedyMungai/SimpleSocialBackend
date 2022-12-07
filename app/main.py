@@ -158,14 +158,13 @@ def update_post(_id: int, _post: Post):
     Returns:
         _type_: Returns a dictionary of the data that has been updated
     """
-    index = find_index_post(_id)
+    cursor.execute(
+        """DELETE FROM posts WHERE id = %s RETURNING *""", (str(_id)))
+    deleted_post = cursor.fetchone()
+    conn.commit()
 
-    if index is None:
+    if deleted_post is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"Post with id: {_id} does not exist")
 
-    post_dict = _post.dict()
-    post_dict['_id'] = id
-    my_posts[index] = post_dict
-
-    return {"data": post_dict}
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
