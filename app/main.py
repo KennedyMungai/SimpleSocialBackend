@@ -110,7 +110,7 @@ def create_posts(post: Post):
     return {"data": new_post}
 
 
-@app.get("/posts/{post_id}")
+@app.get("/posts/{post_id}", status_code=status.HTTP_200_OK)
 def get_post(post_id: int):
     """
         This function is meant to fetch one individual post
@@ -118,7 +118,7 @@ def get_post(post_id: int):
         id (int): The id of the post is passed here
     """
     post = cursor.execute(
-        """SELECT title, content FROM posts WHERE id IS %s""", (str(post_id)))
+        """SELECT * FROM posts WHERE id IS %s""", (str(post_id)))
 
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
