@@ -68,3 +68,98 @@ def find_index_post(_id: int):
     for _i, _p in enumerate(my_posts):
         if _p['id'] == _id:
             return _i
+
+
+@app.get("/")
+def root():
+    """
+        This is an asynchronous function that functions as the root of the API
+
+        Returns:
+            JSON: Returns your typical JSON string although it is hardcoded
+    """
+    return {"data": my_posts}
+
+
+@app.get("/posts")
+def get_posts():
+    """
+        This is a simple function that retrieves all the posts
+    """
+    posts = cursor.execute('SELECT * FROM Posts')
+    print(posts)
+    # return {"data": posts}
+    return {"data": my_posts}
+
+
+@app.post("/posts", status_code=status.HTTP_201_CREATED)
+def create_posts(post: Post):
+    """
+        This is an API function thar creates posts
+    """
+    cursor.execute("INSERT INTO Posts(title, content, is_published) VALUES (%s, %s, %s)",
+                   (post.title, post.content, post.published))
+    conn.commit()
+    # cursor.close()
+    # conn.close()
+    return {"data": post}
+
+
+@app.get("/posts/{post_id}")
+def get_post(post_id: int):
+    """
+        This function is meant to fetch one individual post
+    Args:
+        id (int): The id of the post is passed here
+    """
+    post = find_post(post_id)
+
+    if not post:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"post with id: {id} was not found")
+
+    return {"Post": post}
+
+
+@app.delete("/posts/{post_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_post(post_id: int):
+    """A simple function for deleting posts
+
+    Args:
+        post_id (int): The id of the post to be deleted
+    """
+    index = find_index_post(post_id)
+
+    if index is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with id: {post_id} was not found")
+
+    my_posts.pop(index)
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+
+@app.put("/posts/{_id}")
+def update_post(_id: int, _post: Post):
+    """This is a function that executes at the update endpoint
+
+    Args:
+        _id (int): The identifier of the post
+        _post (Post): The post itself
+
+    Raises:
+        HTTPException: This exception is raised if the post being looked for doesn't exist
+
+    Returns:
+        _type_: Returns a dictionary of the data that has been updated
+    """
+    index = find_index_post(_id)
+
+    if index is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"Post with id: {_id} does not exist")
+
+    post_dict = _post.dict()
+    post_dict['_id'] = id
+    my_posts[index] = post_dict
+
+    return {"data": post_dict}
