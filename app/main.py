@@ -23,6 +23,9 @@ try:
         database='simple_social_db'
     )
 
+    if conn.is_connected():
+        print("Connected to the mysql database")
+
     cursor = conn.cursor(dictionary=True)
 except mysql.connector.Error as error:
     print(error)
