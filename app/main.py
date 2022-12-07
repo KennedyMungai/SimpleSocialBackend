@@ -94,7 +94,7 @@ def get_posts():
     """
     posts = cursor.execute('SELECT * FROM posts')
     print(posts)
-    # return {"data": posts}
+
     return {"data": posts}
 
 
@@ -106,8 +106,7 @@ def create_posts(post: Post):
     new_post = cursor.execute("INSERT INTO posts(title, content, is_published) VALUES (%s, %s, %s)",
                               (post.title, post.content, post.published))
     conn.commit()
-    # cursor.close()
-    # conn.close()
+
     return {"data": new_post}
 
 
