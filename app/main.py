@@ -5,3 +5,8 @@ Author:- Kennedy Mungai
 
 Project:- Simple social media backend
 """
+
+from fastapi import FastAPI
+import mysql.connector
+
+app = FastAPI()
