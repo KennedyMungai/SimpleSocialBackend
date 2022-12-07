@@ -103,7 +103,7 @@ def create_posts(post: Post):
     """
         This is an API function thar creates posts
     """
-    new_post = cursor.execute("INSERT INTO posts(title, content, is_published) VALUES (%s, %s, %s)",
+    new_post = cursor.execute("""INSERT INTO posts(title, content, is_published) VALUES (%s, %s, %s)""",
                               (post.title, post.content, post.published))
     conn.commit()
 
@@ -117,14 +117,14 @@ def get_post(post_id: int):
     Args:
         id (int): The id of the post is passed here
     """
-    post = cursor.execute(
+    get_post = cursor.execute(
         """SELECT * FROM posts WHERE id IS %s""", (str(post_id)))
 
-    if not post:
+    if not get_post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"post with id: {id} was not found")
 
-    return {"Post": post}
+    return {"Post": get_post}
 
 
 @app.delete("/posts/{post_id}", status_code=status.HTTP_204_NO_CONTENT)
