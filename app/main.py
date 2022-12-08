@@ -134,13 +134,15 @@ def delete_post(post_id: int):
     Args:
         post_id (int): The id of the post to be deleted
     """
-    index = find_index_post(post_id)
+    cursor.execute(
+        """DELETE FROM posts WHERE id = %s RETURNING *""", (str(post_id)))
+    deleted_post = cursor.fetchone()
+    conn.commit()
 
-    if index is None:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with id: {post_id} was not found")
+    if deleted_post is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"Post with id: {post_id} does not exist")
 
-    my_posts.pop(index)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
@@ -158,13 +160,3 @@ def update_post(_id: int, _post: Post):
     Returns:
         _type_: Returns a dictionary of the data that has been updated
     """
-    cursor.execute(
-        """DELETE FROM posts WHERE id = %s RETURNING *""", (str(_id)))
-    deleted_post = cursor.fetchone()
-    conn.commit()
-
-    if deleted_post is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"Post with id: {_id} does not exist")
-
-    return Response(status_code=status.HTTP_204_NO_CONTENT)
