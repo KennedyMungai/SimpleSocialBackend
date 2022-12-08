@@ -60,37 +60,6 @@ class Post(BaseModel):
     rating: Optional[int] = None
 
 
-my_posts = [
-    {"title": "title of post 1", "content": "Content of post 1", "id": 1},
-    {"title": "Favorite foods", "content": "I like pizza", "id": 2}
-]
-
-
-def find_post(_id: int):
-    """
-    This is the function that finds posts
-    Args:
-        _id (int): This is the id of the post in the database
-    """
-    for _p in my_posts:
-        if _p["id"] == _id:
-            return _p
-
-
-def find_index_post(_id: int):
-    """This function find posts bi index
-
-    Args:
-        _id (int): This is the id of the post
-
-    Returns:
-        post: Returns the post of the id indicated
-    """
-    for _i, _p in enumerate(my_posts):
-        if _p['id'] == _id:
-            return _i
-
-
 @app.get("/")
 def root():
     """
