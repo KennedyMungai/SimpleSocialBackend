@@ -13,7 +13,7 @@ import mysql.connector
 from fastapi import FastAPI, Response, status, HTTPException, Depends
 from pydantic import BaseModel
 
-from . import models
+from . import models, schemas
 from .database import SessionLocal, engine
 from sqlalchemy.orm import Session
 from .database import get_db
