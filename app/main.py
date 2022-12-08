@@ -65,13 +65,14 @@ def root():
 
 
 @app.get("/posts")
-def get_posts():
+def get_posts(db: Session = Depends(get_db)):
     """
         This is a simple function that retrieves all the posts
     """
-    posts = cursor.execute('SELECT * FROM posts')
-    print(posts)
+    # posts = cursor.execute('SELECT * FROM posts')
+    # print(posts)
 
+    posts = db.query(models.Post).all()
     return {"data": posts}
 
 
