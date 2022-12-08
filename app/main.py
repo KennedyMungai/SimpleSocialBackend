@@ -5,7 +5,7 @@ Author:- Kennedy Mungai
 
 Project:- Simple social media backend
 """
-from typing import Optional
+from typing import Optional, List
 # from random import randrange
 # import time
 import mysql.connector
@@ -64,7 +64,7 @@ def root():
     return posts
 
 
-@app.get("/posts")
+@app.get("/posts", response_model=List[schemas.Post])
 def get_posts(db: Session = Depends(get_db)):
     """
         This is a simple function that retrieves all the posts
