@@ -161,7 +161,7 @@ def update_post(_id: int, _post: Post):
         _type_: Returns a dictionary of the data that has been updated
     """
     cursor.execute("""UPDATE posts SET title= %s, content=%s, is_published=%s WHERE id = %s""",
-                   (_post.title, _post.content, _post.is_published, _id))
+                   (_post.title, _post.content, _post.is_published, str(_id)))
 
     conn.commit()
 
