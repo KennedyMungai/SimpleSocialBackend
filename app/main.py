@@ -13,6 +13,11 @@ import mysql.connector
 from fastapi import FastAPI, Response, status, HTTPException
 from pydantic import BaseModel
 
+from . import models
+from . import engine
+
+models.Base.metadata.create_all(bind=engine)
+
 app = FastAPI()
 
 try:
