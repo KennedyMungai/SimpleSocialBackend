@@ -135,7 +135,7 @@ def delete_post(post_id: int):
         post_id (int): The id of the post to be deleted
     """
     cursor.execute(
-        """DELETE FROM posts WHERE id = %s RETURNING *""", (str(post_id)))
+        """DELETE FROM posts WHERE id = %s""", (str(post_id)))
     deleted_post = cursor.fetchone()
     conn.commit()
 
@@ -160,7 +160,7 @@ def update_post(_id: int, _post: Post):
     Returns:
         _type_: Returns a dictionary of the data that has been updated
     """
-    cursor.execute("""UPDATE posts SET title= %s, content=%s, published=%s RETURNING *""",
+    cursor.execute("""UPDATE posts SET title= %s, content=%s, published=%s""",
                    (_post.title, _post.content, _post.published))
 
     conn.commit()
