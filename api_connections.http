@@ -14,13 +14,13 @@ POST http://127.0.0.1:8000/posts HTTP/1.1
 Content-Type: application/json
 
 {
-    "title": "Tom and Jerry",
-    "content": "Well alrit, well all root, well all right",
+    "title": "P squared",
+    "content": "E no easy A",
     "published": "true"
 }
 
 ### The endpoint for deleting posts
-DELETE http://127.0.0.1:8000/posts/4 HTTP/1.1
+DELETE http://127.0.0.1:8000/posts/10 HTTP/1.1
 
 ### The endpoint to update items inside the db
 PUT  http://127.0.0.1:8000/posts/1 HTTP/1.1
