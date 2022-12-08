@@ -167,3 +167,8 @@ def update_post(_id: int, _post: schemas.PostCreate, db: Session = Depends(get_d
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"post with id: {id} does not exist")
     return updated_post
+
+
+@app.post("/user", status_code=status.HTTP_201_CREATED, response_model=schemas.User)
+def create_user():
+    pass
