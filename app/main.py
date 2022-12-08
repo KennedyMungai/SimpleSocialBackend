@@ -5,6 +5,7 @@ Author:- Kennedy Mungai
 
 Project:- Simple social media backend
 """
+from enum import auto
 from typing import Optional, List
 # from random import randrange
 # import time
@@ -20,6 +21,7 @@ from .database import get_db
 
 from passlib.context import CryptContext
 
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated=auto)
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
