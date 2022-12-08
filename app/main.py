@@ -142,8 +142,8 @@ def delete_post(post_id: int, db: Session = Depends(get_db)):
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
-@ app.put("/posts/{_id}")
-def update_post(_id: int, _post: schemas.PostCreate):
+@ app.put("/posts/{_id}", response_model=schemas.Post)
+def update_post(_id: int, _post: schemas.PostCreate, db: Session = Depends(get_db)):
     """This is a function that executes at the update endpoint
 
     Args:
