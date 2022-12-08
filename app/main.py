@@ -170,5 +170,5 @@ def update_post(_id: int, _post: schemas.PostCreate, db: Session = Depends(get_d
 
 
 @app.post("/user", status_code=status.HTTP_201_CREATED)
-def create_user(db: Session = Depends(get_db), user: Schemas.UserCreate):
+def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     pass
