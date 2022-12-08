@@ -1,3 +1,15 @@
+from fastapi import FastAPI, Response, status, HTTPException, Depends
+
+from app import models, schemas, utils
+from sqlalchemy.orm import Session
+
+from app import schemas, models, utils
+from app.database import get_db
+
+
+app = FastAPI()
+
+
 @app.get("/users/{id}", response_model=schemas.UserOut)
 def get_user(id: int, db: Session = Depends(get_db)):
     user = db.query(models.User).filter(models.User.id).first()

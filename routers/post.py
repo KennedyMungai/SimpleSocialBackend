@@ -1,3 +1,15 @@
+from typing import List
+from fastapi import FastAPI, Response, status, HTTPException, Depends
+from sqlalchemy.orm import Session
+
+from app.database import get_db
+
+from app import schemas, models
+
+
+app = FastAPI()
+
+
 @app.get("/posts", response_model=List[schemas.Post])
 def get_posts(db: Session = Depends(get_db)):
     """
@@ -90,14 +102,15 @@ def update_post(_id: int, _post: schemas.PostCreate, db: Session = Depends(get_d
     Returns:
         _type_: Returns a dictionary of the data that has been updated
     """
-    cursor.execute("""UPDATE posts SET title= %s, content=%s, is_published=%s WHERE id = %s""",
-                   (_post.title, _post.content, _post.is_published, str(_id)))
+    # cursor.execute("""UPDATE posts SET title= %s, content=%s, is_published=%s WHERE id = %s""",
+    #                (_post.title, _post.content, _post.is_published, str(_id)))
 
-    conn.commit()
+    # conn.commit()
 
-    updated_post = cursor.fetchone()
+    # updated_post = cursor.fetchone()
 
-    if updated_post == None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"post with id: {id} does not exist")
-    return updated_post
+    # if updated_post == None:
+    #     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+    #                         detail=f"post with id: {id} does not exist")
+    # return updated_post
+    pass
