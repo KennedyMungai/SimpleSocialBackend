@@ -21,4 +21,4 @@ Content-Type: application/json
 
 ### The endpoint for deleting posts
 DELETE http://127.0.0.1:8000/posts/4 HTTP/1.1
-Content-Type: application/json
+
