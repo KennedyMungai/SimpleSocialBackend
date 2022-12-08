@@ -83,7 +83,7 @@ def get_posts():
 
 
 @app.post("/posts", status_code=status.HTTP_201_CREATED)
-def create_posts(post: Post):
+def create_posts(post: schemas.PostCreate):
     """
         This is an API function thar creates posts
     """
@@ -131,7 +131,7 @@ def delete_post(post_id: int):
 
 
 @app.put("/posts/{_id}")
-def update_post(_id: int, _post: Post):
+def update_post(_id: int, _post: schemas.PostCreate):
     """This is a function that executes at the update endpoint
 
     Args:
