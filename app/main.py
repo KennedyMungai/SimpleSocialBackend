@@ -83,35 +83,40 @@ def get_posts():
 
 
 @app.post("/posts", status_code=status.HTTP_201_CREATED)
-def create_posts(post: schemas.PostCreate):
+def create_posts(post: schemas.PostCreate, db: Session = Depends(get_db)):
     """
         This is an API function thar creates posts
     """
-    new_post = cursor.execute("""INSERT INTO posts(title, content, is_published) VALUES (%s, %s, %s)""",
-                              (post.title, post.content, post.is_published))
-    conn.commit()
+    # new_post = cursor.execute("""INSERT INTO posts(title, content, is_published) VALUES (%s, %s, %s)""",
+    #                           (post.title, post.content, post.is_published))
+    # conn.commit()
+
+    new_post = models.Post(**post.dict())
+    db.add(new_post)]
+    db.commit()
+    db.refresh(new_post)
 
     return {"data": new_post}
 
 
-@app.get("/posts/{post_id}", status_code=status.HTTP_200_OK)
+@ app.get("/posts/{post_id}", status_code=status.HTTP_200_OK)
 def get_post(post_id: int):
     """
         This function is meant to fetch one individual post
     Args:
         id (int): The id of the post is passed here
     """
-    get_post = cursor.execute(
+    get_post= cursor.execute(
         """SELECT * FROM posts WHERE id IS %s""", (str(post_id)))
 
     if not get_post:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"post with id: {id} was not found")
+        raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,
+                            detail = f"post with id: {id} was not found")
 
     return {"Post": get_post}
 
 
-@app.delete("/posts/{post_id}", status_code=status.HTTP_204_NO_CONTENT)
+@ app.delete("/posts/{post_id}", status_code = status.HTTP_204_NO_CONTENT)
 def delete_post(post_id: int):
     """A simple function for deleting posts
 
@@ -120,17 +125,17 @@ def delete_post(post_id: int):
     """
     cursor.execute(
         """DELETE FROM posts WHERE id = %s""", (str(post_id)))
-    deleted_post = cursor.fetchone()
+    deleted_post=cursor.fetchone()
     conn.commit()
 
     if deleted_post is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"Post with id: {post_id} does not exist")
+        raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,
+                            detail = f"Post with id: {post_id} does not exist")
 
-    return Response(status_code=status.HTTP_204_NO_CONTENT)
+    return Response(status_code = status.HTTP_204_NO_CONTENT)
 
 
-@app.put("/posts/{_id}")
+@ app.put("/posts/{_id}")
 def update_post(_id: int, _post: schemas.PostCreate):
     """This is a function that executes at the update endpoint
 
