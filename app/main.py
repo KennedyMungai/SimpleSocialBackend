@@ -163,6 +163,8 @@ def update_post(_id: int, _post: Post):
     cursor.execute("""UPDATE posts SET title= %s, content=%s, published=%s RETURNING *""",
                    (_post.title, _post.content, _post.published))
 
+    conn.commit()
+
     updated_post = cursor.fetchone()
 
     if updated_post == None:
