@@ -6,13 +6,7 @@ class Post(BaseModel):
     content: str
 
 
-class CreatePost(BaseModel):
+class PostBase(BaseModel):
     title: str
     content: str
-    is_published: bool
-
-
-class UpdatePost(BaseModel):
-    title: str
-    content: str
-    is_published: bool = True
+    published: bool = True
