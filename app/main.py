@@ -40,7 +40,7 @@ class Post(BaseModel):
     """
     title: str
     content: str
-    published: bool = True
+    is_published: bool = True
     rating: Optional[int] = None
 
 
@@ -104,7 +104,7 @@ def create_posts(post: Post):
         This is an API function thar creates posts
     """
     new_post = cursor.execute("""INSERT INTO posts(title, content, is_published) VALUES (%s, %s, %s)""",
-                              (post.title, post.content, post.published))
+                              (post.title, post.content, post.is_published))
     conn.commit()
 
     return {"data": new_post}
@@ -160,8 +160,8 @@ def update_post(_id: int, _post: Post):
     Returns:
         _type_: Returns a dictionary of the data that has been updated
     """
-    cursor.execute("""UPDATE posts SET title= %s, content=%s, published=%s""",
-                   (_post.title, _post.content, _post.published))
+    cursor.execute("""UPDATE posts SET title= %s, content=%s, is_published=%s""",
+                   (_post.title, _post.content, _post.is_published))
 
     conn.commit()
 
