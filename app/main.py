@@ -93,21 +93,26 @@ def create_posts(post: schemas.PostCreate, db: Session = Depends(get_db)):
     return new_post
 
 
-@ app.get("/posts/{post_id}", status_code=status.HTTP_200_OK)
-def get_post(post_id: int):
+@ app.get("/posts/{post_id}", status_code=status.HTTP_200_OK, response_model=schemas.Post)
+def get_post(post_id: int, db: Session = Depends(get_db)):
     """
         This function is meant to fetch one individual post
     Args:
         id (int): The id of the post is passed here
     """
-    get_post = cursor.execute(
-        """SELECT * FROM posts WHERE id IS %s""", (str(post_id)))
+    # get_post = cursor.execute(
+    #     """SELECT * FROM posts WHERE id IS %s""", (str(post_id)))
 
-    if not get_post:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"post with id: {id} was not found")
+    # if not get_post:
+    #     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+    #                         detail=f"post with id: {id} was not found")
+    post = db.query(models.Post).filter(models.Post.id == id).first()
 
-    return get_post
+    if not post:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"Post with id: {id} was not found.")
+
+    return post
 
 
 @ app.delete("/posts/{post_id}", status_code=status.HTTP_204_NO_CONTENT)
