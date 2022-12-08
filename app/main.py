@@ -85,7 +85,7 @@ def create_posts(post: schemas.PostCreate, db: Session = Depends(get_db)):
     # conn.commit()
 
     new_post = models.Post(**post.dict())
-    db.add(new_post)]
+    db.add(new_post)
     db.commit()
     db.refresh(new_post)
 
@@ -99,17 +99,17 @@ def get_post(post_id: int):
     Args:
         id (int): The id of the post is passed here
     """
-    get_post= cursor.execute(
+    get_post = cursor.execute(
         """SELECT * FROM posts WHERE id IS %s""", (str(post_id)))
 
     if not get_post:
-        raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,
-                            detail = f"post with id: {id} was not found")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"post with id: {id} was not found")
 
     return {"Post": get_post}
 
 
-@ app.delete("/posts/{post_id}", status_code = status.HTTP_204_NO_CONTENT)
+@ app.delete("/posts/{post_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_post(post_id: int):
     """A simple function for deleting posts
 
@@ -118,14 +118,14 @@ def delete_post(post_id: int):
     """
     cursor.execute(
         """DELETE FROM posts WHERE id = %s""", (str(post_id)))
-    deleted_post=cursor.fetchone()
+    deleted_post = cursor.fetchone()
     conn.commit()
 
     if deleted_post is None:
-        raise HTTPException(status_code = status.HTTP_404_NOT_FOUND,
-                            detail = f"Post with id: {post_id} does not exist")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"Post with id: {post_id} does not exist")
 
-    return Response(status_code = status.HTTP_204_NO_CONTENT)
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
 @ app.put("/posts/{_id}")
