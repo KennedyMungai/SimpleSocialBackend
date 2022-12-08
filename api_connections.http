@@ -31,3 +31,6 @@ Content-Type: application/json
     "content": "Emergency",
     "published": "true"
 }
+
+### A simple API call for the test route
+GET http://127.0.0.1:8000/sqlalchemy HTTP/1.1
