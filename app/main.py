@@ -18,6 +18,8 @@ from .database import SessionLocal, engine
 from sqlalchemy.orm import Session
 from .database import get_db
 
+from passlib.context import CryptContext
+
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
