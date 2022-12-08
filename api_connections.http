@@ -14,11 +14,11 @@ POST http://127.0.0.1:8000/posts HTTP/1.1
 Content-Type: application/json
 
 {
-    "title": "Audioslave",
-    "content": "Like a stone",
+    "title": "Tom and Jerry",
+    "content": "Well alrit, well all root, well all right",
     "published": "true"
 }
 
 ### The endpoint for deleting posts
-DELETE http://127.0.0.1:8000/posts/2 HTTP/1.1
+DELETE http://127.0.0.1:8000/posts/4 HTTP/1.1
 Content-Type: application/json
