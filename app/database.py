@@ -6,3 +6,5 @@ from sqlalchemy.orm import sessionmaker
 SQLALCHEMY_DATABASE_URL = 'mysql://root:xknightmare12873@localhost/simple_social_db'
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
+
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
