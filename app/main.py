@@ -64,13 +64,6 @@ def root():
     return {"data": posts}
 
 
-@app.get("/sqlalchemy")
-def test_posts(db: Session = Depends(get_db)):
-    posts = db.query(models.Post).all()
-
-    return {"data": posts}
-
-
 @app.get("/posts")
 def get_posts():
     """
