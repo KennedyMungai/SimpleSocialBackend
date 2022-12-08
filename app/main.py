@@ -10,11 +10,12 @@ from typing import Optional
 # import time
 import mysql.connector
 
-from fastapi import FastAPI, Response, status, HTTPException
+from fastapi import FastAPI, Response, status, HTTPException, Depends
 from pydantic import BaseModel
 
 from . import models
 from .database import SessionLocal, engine
+from sqlalchemy.orm import Session
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -70,6 +71,11 @@ def root():
     """
     posts = cursor.execute('SELECT * FROM posts')
     return {"data": posts}
+
+
+@app.get("/sqlalchemy")
+def test_posts(db: Session = Depends(get_db)):
+    return {"status": "success"}
 
 
 @app.get("/posts")
