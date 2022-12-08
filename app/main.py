@@ -61,7 +61,7 @@ def root():
             JSON: Returns your typical JSON string although it is hardcoded
     """
     posts = cursor.execute('SELECT * FROM posts')
-    return {"data": posts}
+    return posts
 
 
 @app.get("/posts")
@@ -73,7 +73,7 @@ def get_posts(db: Session = Depends(get_db)):
     # print(posts)
 
     posts = db.query(models.Post).all()
-    return {"data": posts}
+    return posts
 
 
 @app.post("/posts", status_code=status.HTTP_201_CREATED)
@@ -90,7 +90,7 @@ def create_posts(post: schemas.PostCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_post)
 
-    return {"data": new_post}
+    return new_post
 
 
 @ app.get("/posts/{post_id}", status_code=status.HTTP_200_OK)
@@ -107,7 +107,7 @@ def get_post(post_id: int):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"post with id: {id} was not found")
 
-    return {"Post": get_post}
+    return get_post
 
 
 @ app.delete("/posts/{post_id}", status_code=status.HTTP_204_NO_CONTENT)
@@ -153,4 +153,4 @@ def update_post(_id: int, _post: schemas.PostCreate):
     if updated_post == None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"post with id: {id} does not exist")
-    return {"data": updated_post}
+    return updated_post
