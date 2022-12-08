@@ -14,7 +14,7 @@ from fastapi import FastAPI, Response, status, HTTPException
 from pydantic import BaseModel
 
 from . import models
-from . import engine
+from .database import engine
 
 models.Base.metadata.create_all(bind=engine)
 
