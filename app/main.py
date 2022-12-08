@@ -16,6 +16,7 @@ from pydantic import BaseModel
 from . import models
 from .database import SessionLocal, engine
 from sqlalchemy.orm import Session
+from .database import get_db
 
 models.Base.metadata.create_all(bind=engine)
 
