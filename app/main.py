@@ -160,3 +160,12 @@ def update_post(_id: int, _post: Post):
     Returns:
         _type_: Returns a dictionary of the data that has been updated
     """
+    cursor.execute("""UPDATE posts SET title= %s, content=%s, published=%s RETURNING *""",
+                   (_post.title, _post.content, _post.published))
+
+    updated_post = cursor.fetchone()
+
+    if updated_post == None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"post with id: {id} does not exist")
+    return {"data": updated_post}
