@@ -9,7 +9,7 @@ from typing import Optional, List
 # from random import randrange
 # import time
 import mysql.connector
-
+import utils
 from fastapi import FastAPI, Response, status, HTTPException, Depends
 from pydantic import BaseModel
 
@@ -18,9 +18,6 @@ from .database import SessionLocal, engine
 from sqlalchemy.orm import Session
 from .database import get_db
 
-from passlib.context import CryptContext
-
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -175,7 +172,7 @@ def update_post(_id: int, _post: schemas.PostCreate, db: Session = Depends(get_d
 @app.post("/user", status_code=status.HTTP_201_CREATED, response_model=schemas.UserOut)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     # Hashing the password - user.password
-    hashed_password = pwd_context.hash(user.password)
+    hashed_password = utils.hash(user.password)
     user.password = hashed_password
 
     new_user = models.User(**user.dict())
