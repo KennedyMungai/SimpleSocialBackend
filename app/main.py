@@ -14,6 +14,8 @@ from . import models, schemas, utils
 from .database import SessionLocal, engine, get_db
 from sqlalchemy.orm import Session
 
+from routers import post, user
+
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
