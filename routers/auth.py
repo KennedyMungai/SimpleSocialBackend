@@ -14,6 +14,7 @@ router = APIRouter(
 @router.post("/login")
 def login(user_credentials: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     # The OAuth2PasswordRequestForm only returns a username and a password
+    # It's basically a dictionary
     user = db.query(models.User).filter(
         models.User.email == user_credentials.username).first()
 
