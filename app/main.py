@@ -53,6 +53,7 @@ class Post(BaseModel):
 
 
 app.include_router(post.router)
+app.include_router(user.router)
 
 
 @app.get("/")
