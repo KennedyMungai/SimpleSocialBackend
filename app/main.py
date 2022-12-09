@@ -5,14 +5,13 @@ Author:- Kennedy Mungai
 
 Project:- Simple social media backend
 """
-from typing import Optional, List
+from typing import Optional
 import mysql.connector
 from fastapi import FastAPI, APIRouter
 from pydantic import BaseModel
 
-from . import models, schemas, utils
-from .database import SessionLocal, engine, get_db
-from sqlalchemy.orm import Session
+from . import models
+from .database import engine
 
 from routers import post, user
 
