@@ -8,7 +8,8 @@ from app import schemas, models
 
 
 router = APIRouter(
-    prefix="/posts"
+    prefix="/posts",
+    tags=["Posts"]
 )
 
 
