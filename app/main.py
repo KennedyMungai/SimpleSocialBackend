@@ -7,7 +7,7 @@ Project:- Simple social media backend
 """
 from typing import Optional, List
 import mysql.connector
-from fastapi import FastAPI, Response, status, HTTPException, Depends
+from fastapi import FastAPI, APIRouter
 from pydantic import BaseModel
 
 from . import models, schemas, utils
@@ -19,6 +19,8 @@ from routers import post, user
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+router = APIRouter()
 
 
 try:
@@ -48,6 +50,9 @@ class Post(BaseModel):
     content: str
     is_published: bool = True
     rating: Optional[int] = None
+
+
+app.include_router(post.router)
 
 
 @app.get("/")
