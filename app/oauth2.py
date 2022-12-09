@@ -1,3 +1,4 @@
+from fastapi import Depends, status, HTTPException
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
 
@@ -32,3 +33,7 @@ def verify_access_token(token: str, credentials_exception):
         token_data = schemas.TokenData(id=id)
     except JWTError:
         raise credentials_exception
+
+
+def get_current_user(token: str = Depends()):
+    pass
