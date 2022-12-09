@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 from app import schemas
 
-oath2_scheme = OAuth2PasswordBearer(tokenUrl='login')
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl='login')
 
 # To generate a secret key use 'openssl rand -hex 32'
 SECRET_KEY = "14c497b2746482189dc1b0c1859aa3e4ff9023ffa9c6ae07c2d620693bb5f15f"
@@ -37,5 +37,9 @@ def verify_access_token(token: str, credentials_exception):
         raise credentials_exception
 
 
-def get_current_user(token: str = Depends()):
-    pass
+def get_current_user(token: str = Depends(oauth2_scheme)):
+    credentials_exception = HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
+                                          detail=f"Could not validate credentials",
+                                          headers={"WWW-Authenticate": "Bearer"})
+
+    return verify_access_token(token, credentials_exception)
