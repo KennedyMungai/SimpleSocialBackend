@@ -25,7 +25,7 @@ def get_posts(db: Session = Depends(get_db)):
     return posts
 
 
-@router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.Post)
+@router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.Post, get_current_user: int=Depends(oauth2.get_current_user))
 def create_posts(post: schemas.PostCreate, db: Session = Depends(get_db)):
     """
         This is an API function thar creates posts
