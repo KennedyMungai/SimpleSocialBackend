@@ -65,7 +65,7 @@ def get_post(post_id: int, db: Session = Depends(get_db)):
 
 
 @router.delete("/{post_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_post(post_id: int, db: Session = Depends(get_db)):
+def delete_post(post_id: int, db: Session = Depends(get_db), get_current_user: int = Depends(oauth2.get_current_user)):
     """A simple function for deleting posts
 
     Args:
@@ -92,7 +92,7 @@ def delete_post(post_id: int, db: Session = Depends(get_db)):
 
 
 @router.put("/{_id}", response_model=schemas.Post)
-def update_post(_id: int, _post: schemas.PostCreate, db: Session = Depends(get_db)):
+def update_post(_id: int, _post: schemas.PostCreate, db: Session = Depends(get_db), get_current_user: int = Depends(oauth2.get_current_user)):
     """This is a function that executes at the update endpoint
 
     Args:
