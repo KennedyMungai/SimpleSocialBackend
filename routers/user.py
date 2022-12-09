@@ -9,8 +9,6 @@ from app.database import get_db
 
 router = APIRouter()
 
-# app = FastAPI()
-
 
 @router.get("/users/{id}", response_model=schemas.UserOut)
 def get_user(id: int, db: Session = Depends(get_db)):
