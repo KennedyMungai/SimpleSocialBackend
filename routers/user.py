@@ -7,6 +7,8 @@ from app import schemas, models, utils
 from app.database import get_db
 
 
+router = APIRouter()
+
 app = FastAPI()
 
 
