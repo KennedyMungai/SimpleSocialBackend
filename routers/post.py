@@ -43,7 +43,7 @@ def create_posts(post: schemas.PostCreate, db: Session = Depends(get_db), get_cu
 
 
 @router.get("/{post_id}", status_code=status.HTTP_200_OK, response_model=schemas.Post)
-def get_post(post_id: int, db: Session = Depends(get_db), get_current_user: int = Depends(oauth2.get_current_user)):
+def get_post(post_id: int, db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
     """
         This function is meant to fetch one individual post
     Args:
