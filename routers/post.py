@@ -41,7 +41,7 @@ def create_posts(post: schemas.PostCreate, db: Session = Depends(get_db)):
     return new_post
 
 
-@router.get("{post_id}", status_code=status.HTTP_200_OK, response_model=schemas.Post)
+@router.get("/{post_id}", status_code=status.HTTP_200_OK, response_model=schemas.Post)
 def get_post(post_id: int, db: Session = Depends(get_db)):
     """
         This function is meant to fetch one individual post
@@ -63,7 +63,7 @@ def get_post(post_id: int, db: Session = Depends(get_db)):
     return post
 
 
-@router.delete("{post_id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{post_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_post(post_id: int, db: Session = Depends(get_db)):
     """A simple function for deleting posts
 
@@ -90,7 +90,7 @@ def delete_post(post_id: int, db: Session = Depends(get_db)):
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
-@router.put("{_id}", response_model=schemas.Post)
+@router.put("/{_id}", response_model=schemas.Post)
 def update_post(_id: int, _post: schemas.PostCreate, db: Session = Depends(get_db)):
     """This is a function that executes at the update endpoint
 
