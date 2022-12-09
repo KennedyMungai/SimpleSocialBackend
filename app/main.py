@@ -6,17 +6,13 @@ Author:- Kennedy Mungai
 Project:- Simple social media backend
 """
 from typing import Optional, List
-# from random import randrange
-# import time
 import mysql.connector
-import utils
 from fastapi import FastAPI, Response, status, HTTPException, Depends
 from pydantic import BaseModel
 
-from . import models, schemas
-from .database import SessionLocal, engine
+from . import models, schemas, utils
+from .database import SessionLocal, engine, get_db
 from sqlalchemy.orm import Session
-from .database import get_db
 
 models.Base.metadata.create_all(bind=engine)
 
