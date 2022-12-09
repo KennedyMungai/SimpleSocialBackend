@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, status, HTTPException, Response
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app import schemas
+from app import models, schemas
 
 
 router = APIRouter(
@@ -12,4 +12,5 @@ router = APIRouter(
 
 @router.post("/login")
 def login(user_credentials: schemas.UserLogin, db: Session = Depends(get_db)):
-    pass
+    user = db.query(models.User).filter(
+        models.User.email == user_credentials.email).first()
