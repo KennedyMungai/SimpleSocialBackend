@@ -14,7 +14,7 @@ router = APIRouter(
 
 
 @router.get("/", response_model=List[schemas.Post])
-def get_posts(db: Session = Depends(get_db), get_current_user: int = Depends(oauth2.get_current_user)):
+def get_posts(db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
     """
         This is a simple function that retrieves all the posts
     """
@@ -26,7 +26,7 @@ def get_posts(db: Session = Depends(get_db), get_current_user: int = Depends(oau
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.Post)
-def create_posts(post: schemas.PostCreate, db: Session = Depends(get_db), get_current_user: int = Depends(oauth2.get_current_user)):
+def create_posts(post: schemas.PostCreate, db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
     """
         This is an API function thar creates posts
     """
@@ -65,7 +65,7 @@ def get_post(post_id: int, db: Session = Depends(get_db), current_user: int = De
 
 
 @router.delete("/{post_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_post(post_id: int, db: Session = Depends(get_db), get_current_user: int = Depends(oauth2.get_current_user)):
+def delete_post(post_id: int, db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
     """A simple function for deleting posts
 
     Args:
@@ -92,7 +92,7 @@ def delete_post(post_id: int, db: Session = Depends(get_db), get_current_user: i
 
 
 @router.put("/{_id}", response_model=schemas.Post)
-def update_post(_id: int, _post: schemas.PostCreate, db: Session = Depends(get_db), get_current_user: int = Depends(oauth2.get_current_user)):
+def update_post(_id: int, _post: schemas.PostCreate, db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user)):
     """This is a function that executes at the update endpoint
 
     Args:
