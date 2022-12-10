@@ -22,23 +22,6 @@ app = FastAPI()
 router = APIRouter()
 
 
-try:
-    conn = mysql.connector.connect(
-        host='localhost',
-        user='root',
-        password='xknightmare12873',
-        database='simple_social_db'
-    )
-
-    if conn.is_connected():
-        print("Connected to the mysql database")
-
-    cursor = conn.cursor(dictionary=True)
-except mysql.connector.Error as error:
-    print(error)
-    exit(1)
-
-
 class Post(BaseModel):
     """
     This is the base model for the Post objects
