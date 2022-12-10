@@ -37,6 +37,9 @@ class Settings(BaseSettings):
     secret_key: str = "123456789"
 
 
+settings = Settings()
+
+
 app.include_router(post.router)
 app.include_router(user.router)
 app.include_router(auth.router)
