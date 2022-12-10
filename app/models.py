@@ -11,6 +11,7 @@ class Post(Base):
     is_published = Column(Boolean, server_default='TRUE')
     created_at = Column(TIMESTAMP(timezone=True),
                         nullable=False, server_default=text('now'))
+    owner_id = Column(Integer)
 
 
 class User(Base):
