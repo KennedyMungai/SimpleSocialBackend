@@ -79,9 +79,11 @@ def delete_post(post_id: int, db: Session = Depends(get_db), current_user: int =
     # if deleted_post is None:
     #     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
     #                         detail=f"Post with id: {post_id} does not exist")
-    post = db.query(models.Post).filter(models.Post.id == id)
+    post_query = db.query(models.Post).filter(models.Post.id == id)
 
-    if post.first() == None:
+    post = post_query.first()
+
+    if post == None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"post with id: {id} does not exist")
 
