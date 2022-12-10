@@ -6,7 +6,6 @@ Author:- Kennedy Mungai
 Project:- Simple social media backend
 """
 from typing import Optional
-import mysql.connector
 from fastapi import FastAPI, APIRouter
 from pydantic import BaseModel
 
@@ -47,5 +46,5 @@ def root():
         Returns:
             JSON: Returns your typical JSON string although it is hardcoded
     """
-    posts = cursor.execute('SELECT * FROM posts')
-    return posts
+    # posts = cursor.execute('SELECT * FROM posts')
+    return "posts"
