@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 from fastapi import FastAPI, Response, status, HTTPException, Depends, APIRouter
 from sqlalchemy.orm import Session
 
@@ -14,7 +14,13 @@ router = APIRouter(
 
 
 @router.get("/", response_model=List[schemas.Post])
-def get_posts(db: Session = Depends(get_db), current_user: int = Depends(oauth2.get_current_user), limit: int = 10, skip: int = 0):
+def get_posts(
+        db: Session = Depends(get_db),
+        current_user: int = Depends(oauth2.get_current_user),
+        limit: int = 10,
+        skip: int = 0,
+        search: Optional[str] = ""
+):
     """
         This is a simple function that retrieves all the posts
     """
