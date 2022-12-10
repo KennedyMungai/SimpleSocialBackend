@@ -27,7 +27,9 @@ def get_posts(
     # posts = cursor.execute('SELECT * FROM posts')
     # print(posts)
 
-    posts = db.query(models.Post).limit(limit).offset(skip).all()
+    posts = db.query(models.Post).filter(
+        models.Post.title.contains(search)).limit(limit).offset(skip).all()
+
     return posts
 
 
