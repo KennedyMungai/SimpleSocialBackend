@@ -7,8 +7,7 @@ Project:- Simple social media backend
 """
 from typing import Optional
 from fastapi import FastAPI, APIRouter
-from pydantic import BaseModel
-
+from pydantic import BaseModel, BaseSettings
 from . import models
 from .database import engine
 from routers import post, user, auth
