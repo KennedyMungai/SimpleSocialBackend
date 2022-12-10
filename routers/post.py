@@ -22,7 +22,7 @@ def get_posts(db: Session = Depends(get_db), current_user: int = Depends(oauth2.
     # print(posts)
 
     posts = db.query(models.Post).filter(
-        models.Post.id == current_user.id).all()
+        models.Post.owner_id == current_user.id).all()
     return posts
 
 
