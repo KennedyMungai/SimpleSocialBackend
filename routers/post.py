@@ -131,7 +131,7 @@ def update_post(_id: int, _post: schemas.PostCreate, db: Session = Depends(get_d
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"The post with id = {id} does not exist")
 
-    if post.owner_id != oauth2.get_current_user.id:
+    if post.owner_id != oauth2.current_user.id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                             detail=f"Not authorized to perform the requested action")
 
