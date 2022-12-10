@@ -120,4 +120,21 @@ def update_post(_id: int, _post: schemas.PostCreate, db: Session = Depends(get_d
     #     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
     #                         detail=f"post with id: {id} does not exist")
     # return updated_post
-    pass
+
+    post_query = db.query(models.Post).filter(models.Post.id == id)
+
+    post = post_query.first()
+
+    if post == None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"The post with id = {id} does not exist")
+
+    if post.owner_id != oauth2.get_current_user.id:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
+                            detail=f"Not authorized to perform the requested action")
+
+    post_query.update(updated_post.dict(), synchronize_session=False)
+
+    db.commit()
+
+    return post_query.first()
