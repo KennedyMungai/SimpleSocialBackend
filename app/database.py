@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import mysql.connector
-import config
+from config import settings
 
 
 SQLALCHEMY_DATABASE_URL = f'mysql://root:xknightmare12873@localhost/simple_social_db'
