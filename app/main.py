@@ -8,6 +8,8 @@ Project:- Simple social media backend
 from typing import Optional
 from fastapi import FastAPI, APIRouter
 from pydantic import BaseModel, BaseSettings
+
+from routers.vote import vote
 from . import models
 from .database import engine
 from routers import post, user, auth
@@ -35,6 +37,7 @@ class Post(BaseModel):
 app.include_router(post.router)
 app.include_router(user.router)
 app.include_router(auth.router)
+app.include_router(vote.router)
 
 
 @app.get("/")
