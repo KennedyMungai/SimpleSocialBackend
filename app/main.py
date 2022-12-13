@@ -31,15 +31,6 @@ class Post(BaseModel):
     rating: Optional[int] = None
 
 
-class Settings(BaseSettings):
-    database_password: str = "localhost"
-    database_username: str = "root"
-    secret_key: str = "123456789"
-
-
-settings = Settings()
-
-
 app.include_router(post.router)
 app.include_router(user.router)
 app.include_router(auth.router)
