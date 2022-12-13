@@ -10,9 +10,9 @@ from config import settings
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='login')
 
 # To generate a secret key use 'openssl rand -hex 32'
-SECRET_KEY = "14c497b2746482189dc1b0c1859aa3e4ff9023ffa9c6ae07c2d620693bb5f15f"
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+SECRET_KEY = settings.secret_key
+ALGORITHM = settings.algorithm
+ACCESS_TOKEN_EXPIRE_MINUTES = settings.access_token_expires_minutes
 
 
 def create_access_token(data: dict):
