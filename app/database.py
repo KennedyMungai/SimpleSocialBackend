@@ -5,7 +5,7 @@ import mysql.connector
 from config import settings
 
 
-SQLALCHEMY_DATABASE_URL = f'mysql://root:xknightmare12873@localhost/simple_social_db'
+SQLALCHEMY_DATABASE_URL = f'mysql://{settings.database_username}:{settings.database_password}@{settings.database_hostname}:{settings.database_port}/{settings.database_name}'
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
