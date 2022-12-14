@@ -34,7 +34,7 @@ def get_posts(
     results = db.query(models.Post, func.count(models.Vote.post_id).label("Votes")).join(models.Vote, models.Vote.post_id ==
                                                                                          models.Post.id, isouter=True).group_by(models.Post.id).all()
 
-    return posts
+    return results
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.Post)
