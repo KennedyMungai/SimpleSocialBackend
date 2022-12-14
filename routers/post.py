@@ -31,7 +31,7 @@ def get_posts(
         models.Post.title.contains(search)).limit(limit).offset(skip).all()
 
     results = db.query(models.Post).join(
-        models.Vote, models.Vote.post_id == models.Post.id)
+        models.Vote, models.Vote.post_id == models.Post.id, isouter=True)
 
     return posts
 
