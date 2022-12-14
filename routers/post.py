@@ -1,6 +1,7 @@
 from typing import List, Optional
 from fastapi import FastAPI, Response, status, HTTPException, Depends, APIRouter
 from sqlalchemy.orm import Session
+from sqlalchemy import func
 
 from app.database import get_db
 
@@ -30,8 +31,8 @@ def get_posts(
     posts = db.query(models.Post).filter(
         models.Post.title.contains(search)).limit(limit).offset(skip).all()
 
-    results = db.query(models.Post).join(
-        models.Vote, models.Vote.post_id == models.Post.id, isouter=True)
+    results = db.query(models.Post).join(models.Vote, models.Vote.post_id ==
+                                         models.Post.id, isouter=True).group_by(models.Post.id)
 
     return posts
 
