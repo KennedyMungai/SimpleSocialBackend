@@ -30,6 +30,9 @@ def get_posts(
     posts = db.query(models.Post).filter(
         models.Post.title.contains(search)).limit(limit).offset(skip).all()
 
+    results = db.query(models.Post).join(
+        models.Vote, models.Vote.post_id == models.Post.id)
+
     return posts
 
 
