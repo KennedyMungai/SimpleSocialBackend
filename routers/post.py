@@ -31,8 +31,8 @@ def get_posts(
     posts = db.query(models.Post).filter(
         models.Post.title.contains(search)).limit(limit).offset(skip).all()
 
-    results = db.query(models.Post, func.count(models.Vote.post_id)).join(models.Vote, models.Vote.post_id ==
-                                                                          models.Post.id, isouter=True).group_by(models.Post.id)
+    results = db.query(models.Post, func.count(models.Vote.post_id).label("Votes")).join(models.Vote, models.Vote.post_id ==
+                                                                                         models.Post.id, isouter=True).group_by(models.Post.id)
 
     return posts
 
