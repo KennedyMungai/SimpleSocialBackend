@@ -1,0 +1,33 @@
+version: "3.9"
+services:
+  api:
+    build: . 
+    depends_on:
+      - mysql
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/usr/src/app:ro
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    # env_file:
+    #   - ./.env
+    environment:
+      - DATABASE_HOSTNAME=mysql
+      - DATABASE_PORT=80
+      - DATABASE_PASSWORD=Password1!
+      - DATABASE_NAME=simple_social_db
+      - DATABASE_USERNAME=root
+      - SECRET_KEY=14c497b2746482189dc1b0c1859aa3e4ff9023ffa9c6ae07c2d620693bb5f15f
+      - ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=30
+  mysql:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=Password1!
+      - MYSQL_DATABASE=simple_social_db
+      - MYSQL_USER=root
+    volumes:
+      - simple_social_db=/var/lib/mysql/simple_social_db
+
+volumes:
+  simple_social_db:
