@@ -23,3 +23,6 @@ services:
       - MYSQL_USER=root
     volumes:
       - simple_social_db=/var/lib/mysql/simple_social_db
+
+volumes:
+  simple_social_db:
