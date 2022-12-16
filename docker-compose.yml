@@ -6,6 +6,8 @@ services:
       - mysql
     ports:
       - 8000:8000
+    volumes:
+      - ./:/usr/src/app:ro
     # env_file:
     #   - ./.env
     environment:
