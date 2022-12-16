@@ -21,3 +21,5 @@ services:
       - MYSQL_ROOT_PASSWORD=Password1!
       - MYSQL_DATABASE=simple_social_db
       - MYSQL_USER=root
+    volumes:
+      - simple_social_db=/var/lib/mysql/simple_social_db
