@@ -16,7 +16,7 @@ services:
       - ALGORITHM=HS256
       - ACCESS_TOKEN_EXPIRE_MINUTES=30
   mysql:
-    image: mysql
+    # image: mysql
     environment:
       - MYSQL_ROOT_PASSWORD=Password1!
       - MYSQL_DATABASE=simple_social_db
