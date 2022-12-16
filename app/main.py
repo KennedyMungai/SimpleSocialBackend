@@ -7,6 +7,7 @@ Project:- Simple social media backend
 """
 from typing import Optional
 from fastapi import FastAPI, APIRouter
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, BaseSettings
 
 from routers.vote import vote
